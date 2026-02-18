@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Group Detection</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #003366, #ff6600); /* Dark blue to orange gradient */
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.15); /* Transparent white effect */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        h1 {
+            color: #ffcc00; /* Bright yellow-orange for the title */
+        }
+        p {
+            color: #ffffff; /* Keep text readable */
+        }
+        .btn-primary {
+            background-color: #ff6600; /* Vibrant orange button */
+            border-color: #ff6600;
+        }
+        .btn-primary:hover {
+            background-color: #cc5200; /* Darker orange on hover */
+            border-color: #cc5200;
+        }
+        .form-label {
+            color: #ffcc00; /* Bright yellow-orange for labels */
+        }
+        .result-box {
+            background-color: rgba(0, 51, 102, 0.8); /* Semi-transparent dark blue */
+            padding: 20px;
+            border-radius: 10px;
+            color: #ffcc00; /* Yellow text in result box */
+            margin-top: 20px;
+        }
+        .result-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffcc00; /* Yellow for the result text */
+        }
+        .thumbnail {
+            margin-top: 20px;
+            border: 2px solid #ffcc00; /* Border matches yellow-orange theme */
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blood Group Detection</h1>
+        <p>Upload a fingerprint image to predict the blood group.</p>
+        <form action="/predict" method="POST" enctype="multipart/form-data" class="mt-4">
+            <div class="mb-3">
+                <label for="file" class="form-label">Choose Fingerprint Image:</label>
+                <input type="file" class="form-control" id="file" name="file" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        {% if prediction %}
+        <div class="result-box">
+            <h2>Prediction Result</h2>
+            <p class="result-text">Blood Group: {{ prediction }}</p>
+            <img src="{{ image_path }}" alt="Uploaded Image" class="thumbnail" width="300">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
